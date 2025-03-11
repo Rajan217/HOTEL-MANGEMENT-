@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Hotel Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<>  </
+    <!-- Loader on Page Load -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Hotel Background Image -->
+    <div class="background"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.jpg" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#" id="aboutBtn">About</a></li>
+            <li class="dropdown">
+                <a href="#" id="servicesBtn">Services &#9662;</a>
+                <ul class="dropdown-menu" id="servicesMenu">
+                    <li><a href="#">Order</a></li>
+                    <li><a href="#" id="showItems">List of Items</a></li>
+                    <li><a href="#">Home Service</a></li>
+                    <li><a href="#">Cleaning Service</a></li>
+                    <li><a href="#">Delivery Service</a></li>
+                    <li><a href="#">Repair Service</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="hamburger">&#9776;</div>
+    </nav>
+
+    <!-- About Section (Initially Hidden) -->
+    <div class="about-section" id="aboutSection">
+        <h2>About Us</h2>
+        <p>Welcome to our hotel! We provide the best food and services to make your stay enjoyable.</p>
+        <p>Our hotel offers a wide variety of dishes, including vegetarian, non-vegetarian, and beverages.</p>
+        <p>Come and experience the best hospitality with us.</p>
+        <button id="closeAbout">Close</button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search for items...">
+    </div>
+
+    <!-- Item List -->
+    <div class="item-list" id="itemList">
+        <h2>Available Items</h2>
+        <ul id="menuItems">
+            <li data-name="non-veg"><a href="nonveg.webp" target="_blank"><img src="nonveg.webp" alt="Non-Veg Items"> Non-Veg Items</a></li>
+            <li data-name="veg"><a href="veg.webp" target="_blank"><img src="veg.webp" alt="Veg Items"> Veg Items</a></li>
+            <li data-name="drinks"><a href="drinks.jpg" target="_blank"><img src="drinks.jpg" alt="Drinks"> Drinks</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // Show loader on page load and hide after 3 seconds
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById("pageLoader").style.display = "none";
+            }, 3000);
+        };
+
+        // Navigation Toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        const servicesBtn = document.getElementById("servicesBtn");
+        const servicesMenu = document.getElementById("servicesMenu");
+        const showItems = document.getElementById("showItems");
+        const itemList = document.getElementById("itemList");
+        const aboutBtn = document.getElementById("aboutBtn");
+        const aboutSection = document.getElementById("aboutSection");
+        const closeAbout = document.getElementById("closeAbout");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("show");
+        });
+
+        // Services Dropdown Toggle
+        servicesBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            servicesMenu.classList.toggle("show");
+        });
+
+        // Show/Hide Items List
+        showItems.addEventListener("click", (e) => {
+            e.preventDefault();
+            itemList.classList.toggle("show");
+        });
+
+        // Show About Section When Clicked on "About"
+        aboutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            aboutSection.style.display = "block";
+        });
+
+        // Hide About Section When Clicking "Close"
+        closeAbout.addEventListener("click", () => {
+            aboutSection.style.display = "none";
+        });
+
+        // Search Bar Functionality
+        const searchBar = document.getElementById("searchBar");
+        const menuItems = document.querySelectorAll("#menuItems li");
+
+        searchBar.addEventListener("keyup", () => {
+            let filter = searchBar.value.toLowerCase();
+            menuItems.forEach(item => {
+                let itemName = item.getAttribute("data-name").toLowerCase();
+                item.style.display = itemName.includes(filter) ? "block" : "none";
+            });
+        });
+    </script>
+
+</body>
+</html>
